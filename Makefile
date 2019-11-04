@@ -1,6 +1,6 @@
 DOCKER_REPO=geekodour
 DOCKER_IMAGE_NAME=ghcs
-DOCKER_IMAGE_TAG=0.0.1
+DOCKER_IMAGE_TAG=0.0.2
 
 build:
 	go build -o ghcs -a -tags netgo .
