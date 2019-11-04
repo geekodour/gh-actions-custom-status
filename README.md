@@ -3,9 +3,18 @@ Create custom GitHub status from Github Actions
 
 ### Usage with GitHub Actions
 ```
-- name: Set the custom status
+- name: Update status to pending
   uses: geekodour/gh-actions-custom-status@v0.0.4
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    LAST_COMMIT_SHA: ${{ github.event.client_payload.LAST_COMMIT_SHA }}
+  with:
+    args: >-
+      --state=pending
+      --context=foo-status-update
+      --target_url=https://github.com/${{ github.repository }}/actions
 ```
+This workflow is run on a `repository_dispatch` event.
 
 ### Usage
 ```
