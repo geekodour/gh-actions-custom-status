@@ -5,10 +5,13 @@ Create custom GitHub status from Github Actions
 
 ### Building locally
 ```
-go build -o ghcs .
+make build
 ```
 
 ### Building the Docker image
+```
+make docker-build
+```
 
 ### Environment Variables
 - `GITHUB_TOKEN`: Personal Access token
