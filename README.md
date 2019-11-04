@@ -1,9 +1,11 @@
 # gh-actions-custom-status
 Create custom GitHub status from Github Actions
 
-### 
-
 ### Usage with GitHub Actions
+```
+- name: Set the custom status
+  uses: geekodour/gh-actions-custom-status@v0.0.1
+```
 
 ### Usage
 ```
