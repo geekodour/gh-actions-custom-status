@@ -6,4 +6,4 @@ branding:
   color: 'black'
 runs:
   using: 'docker'
-  image: 'docker://geekodour/ghcs:0.0.2'
+  image: 'docker://geekodour/ghcs:0.0.3'

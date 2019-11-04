@@ -35,7 +35,7 @@ func main() {
 		StringVar(rs.Description)
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
-	envVars := []string{"GITHUB_TOKEN", "GITHUB_REPOSITORY", "GITHUB_REF"}
+	envVars := []string{"GITHUB_TOKEN", "GITHUB_REPOSITORY", "LAST_COMMIT_SHA"}
 	for _, r := range envVars {
 		if os.Getenv(r) == "" {
 			log.Fatalln("env var not set correctly")
@@ -43,7 +43,7 @@ func main() {
 	}
 
 	// Get ref.
-	ref := os.Getenv("GITHUB_REF")
+	ref := os.Getenv("LAST_COMMIT_SHA")
 
 	// Separate Owner and Repo.
 	githubRepo := strings.Split(os.Getenv("GITHUB_REPOSITORY"), "/")
