@@ -12,29 +12,27 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
-type customStatus struct {
-	state       string
-	targetURL   string
-	context     string
-	description string
-}
-
 func main() {
 	log.SetFlags(log.Ltime | log.Lshortfile)
-	cs := customStatus{}
+	rs := github.RepoStatus{
+		State:       github.String(""),
+		TargetURL:   github.String(""),
+		Context:     github.String("default"),
+		Description: github.String(""),
+	}
 	ctx := context.Background()
 
 	app := kingpin.New(filepath.Base(os.Args[0]), `gh-actions-custom-status - Create custom GitHub status.`)
 	app.HelpFlag.Short('h')
 	app.Flag("state", "The state of the status. Can be one of error, failure, pending, or success.").
 		Required().
-		StringVar(&cs.state)
+		StringVar(rs.State)
 	app.Flag("target_url", "The target URL to associate with this status.").
-		StringVar(&cs.targetURL)
+		StringVar(rs.TargetURL)
 	app.Flag("context", "A string label to differentiate this status from the status of other systems.").
-		StringVar(&cs.context)
+		StringVar(rs.Context)
 	app.Flag("description", "A short description of the status.").
-		StringVar(&cs.description)
+		StringVar(rs.Description)
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	envVars := []string{"GITHUB_TOKEN", "GITHUB_REPOSITORY", "GITHUB_REF"}
@@ -57,14 +55,8 @@ func main() {
 	client := github.NewClient(tc)
 
 	// Create GitHub status.
-	rs := github.RepoStatus{
-		TargetURL:   &cs.targetURL,
-		Context:     &cs.context,
-		Description: &cs.description,
-		State:       &cs.state,
-	}
 	_, _, err := client.Repositories.CreateStatus(ctx, githubRepo[0], githubRepo[1], ref, &rs)
 	if err != nil {
-		log.Fatalln("could not create status")
+		log.Fatalf("%v : could not create status", err)
 	}
 }
