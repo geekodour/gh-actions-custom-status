@@ -1,17 +1,9 @@
 # action.yml
-name: 'Black Check'
-description: 'GitHub action to run custom checks'
+name: 'Custom Github Status'
+description: 'GitHub action to create custom status'
 branding:
   icon: 'check-square'
   color: 'black'
-inputs:
-  path:
-    description: 'File or directory to run black on'
-    required: false
-    default: '.'
-outputs:
-  output:
-    description: 'The output of black'
 runs:
   using: 'docker'
-  image: 'docker://geekodour:gh-action-checks'
+  image: 'docker://geekodour:ghcs:0.0.1'
