@@ -1,7 +1,19 @@
 # gh-actions-custom-status
 Create custom GitHub status from Github Actions
 
+### 
+
 ### Usage with GitHub Actions
+
+### Usage
+```
+Flags:
+  -h, --help                     Show context-sensitive help (also try --help-long and --help-man).
+      --state=STATE              The state of the status. Can be one of error, failure, pending, or success.
+      --target_url=TARGET_URL    The target URL to associate with this status.
+      --context=CONTEXT          A string label to differentiate this status from the status of other systems.
+      --description=DESCRIPTION  A short description of the status.
+```
 
 ### Building locally
 ```
